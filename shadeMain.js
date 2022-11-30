@@ -56,8 +56,8 @@ function bindVAO (shape, program) {
     // shape object.  3 floating point values (x,y,z) per vertex are
     // stored in this array.
 
-    let myNormalsBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.NORMAL_ARRAY_BUFFER, myNormalsBuffer);
+    let normalBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.NORMAL_ARRAY_BUFFER, normalBuffer);
     gl.bufferData(
       gl.NORMAL_ARRAY_BUFFER,
       new Float32Array(shape.normals),
@@ -127,8 +127,8 @@ function setUpPhong(program) {
   let lPos = glMatrix.vec3.fromValues(100, -100, 10)
   gl.uniform3fv(program.lightPosition, lPos);
 
-  let lightColorSettings = glMatrix.vec3.fromValues(1, 1, 1)
-  gl.uniform3fv(program.lightColor, lightColorSettings);
+  let lColor = glMatrix.vec3.fromValues(1, 1, 1)
+  gl.uniform3fv(program.lightColor, lColor);
 
 
   let baseColorSettings = glMatrix.vec3.fromValues(1, 0, 0);
@@ -137,19 +137,14 @@ function setUpPhong(program) {
   var specHighlightColor = gl.getUniformLocation(program, "specHighlightColor");
   gl.uniform3fv(specHighlightColor, [0.5, 0.5, 0.5]);
 
-
-
-
-
-  
   var ka = gl.getUniformLocation(program, "ka");
   gl.uniform1f(ka, 1);
 
   var ks = gl.getUniformLocation(program, "ks");
-  gl.uniform1f(ks, 0.4);
+  gl.uniform1f(ks, 1);
 
   var kd = gl.getUniformLocation(program, "kd");
-  gl.uniform1f(kd, 0.5);
+  gl.uniform1f(kd, 1);
 
   var ke = gl.getUniformLocation(program, "ke");
   gl.uniform1f(ke, 1);
